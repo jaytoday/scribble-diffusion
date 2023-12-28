@@ -1,6 +1,7 @@
 import Canvas from "components/canvas";
 import PromptForm from "components/prompt-form";
 import Head from "next/head";
+import Link from "next/link";
 import { useState } from "react";
 import Predictions from "components/predictions";
 import Error from "components/error";
@@ -44,6 +45,7 @@ export default function Home() {
     const body = {
       prompt,
       image: fileUrl,
+      structure: "scribble",
     };
 
     const response = await fetch("/api/predictions", {
@@ -86,16 +88,18 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <>
       <Head>
+        <title>{pkg.appName}</title>
         <meta name="description" content={pkg.appMetaDescription} />
         <meta property="og:title" content={pkg.appName} />
         <meta property="og:description" content={pkg.appMetaDescription} />
         <meta
           property="og:image"
-          content={`${HOST}/og-b7xwc4g4wrdrtneilxnbngzvti.png`}
+          content={`${HOST}/og-b7xwc4g4wrdrtneilxnbngzvti.jpg`}
         />
-        <title>{pkg.appName}</title>s
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </Head>
       <main className="container max-w-[1024px] mx-auto p-5 ">
         <div className="container max-w-[512px] mx-auto">
@@ -132,7 +136,7 @@ export default function Home() {
         />
       </main>
 
-      <Script src="https://js.upload.io/upload-js-full/v1" />
-    </div>
+      <Script src="https://js.bytescale.com/upload-js-full/v1" />
+    </>
   );
 }
